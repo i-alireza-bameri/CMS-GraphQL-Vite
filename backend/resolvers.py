@@ -1,8 +1,7 @@
 import strawberry
 from typing import List, Optional
 from datetime import datetime
-from models import User, Content, Category
-from app import db
+from models import User, Content, Category, db
 import bcrypt
 import jwt
 import os
