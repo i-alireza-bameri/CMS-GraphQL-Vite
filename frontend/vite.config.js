@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [
     react({
       jsxRuntime: 'automatic',
+      babel: false,
     })
   ],
   server: {
