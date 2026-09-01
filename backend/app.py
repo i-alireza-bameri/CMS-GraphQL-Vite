@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 # Import db from models (not create new instance)
 from models import db, User, Content, Category
 
-# Import resolvers
+# Import resolvers with Query and Mutation
 from resolvers import Query, Mutation
 
 load_dotenv()
@@ -22,16 +22,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
 db.init_app(app)
 CORS(app)
 
-@strawberry.type
-class Query:
-    @strawberry.field
-    def hello(self) -> str:
-        return "Welcome to CMS API"
-
-@strawberry.type
-class Mutation:
-    pass
-
+# Create schema using Query and Mutation from resolvers
 schema = strawberry.Schema(query=Query, mutation=Mutation)
 
 app.add_url_rule(
