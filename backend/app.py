@@ -1,10 +1,15 @@
 import os
 from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
 from strawberry.flask.views import GraphQLView
 import strawberry
 from dotenv import load_dotenv
+
+# Import db from models (not create new instance)
+from models import db, User, Content, Category
+
+# Import resolvers
+from resolvers import Query, Mutation
 
 load_dotenv()
 
@@ -13,14 +18,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///cms
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
 
-db = SQLAlchemy(app)
+# Initialize db with app
+db.init_app(app)
 CORS(app)
-
-# Import models
-from models import User, Content, Category
-
-# Import resolvers
-from resolvers import Query, Mutation
 
 @strawberry.type
 class Query:
