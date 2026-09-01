@@ -1,6 +1,9 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import uuid
+
+# Initialize SQLAlchemy without app to avoid circular imports
+db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = 'users'
